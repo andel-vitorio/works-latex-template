@@ -1,8 +1,11 @@
 # Nome do projeto (pasta principal onde será criada a estrutura)
 PROJECT_NAME = meu_projeto_latex
 
-# Diretórios que serão criados dentro da pasta do projeto
-DIRECTORIES = Appendixes Chapters Figures Logos Pre-textual
+# Diretórios que serão criados dentro da pasta do projeto (sem Logos e Pre-textual)
+DIRECTORIES = Appendixes Chapters Figures
+
+# Pastas que serão copiadas com seus conteúdos
+FOLDERS_TO_COPY = Logos Pre-textual
 
 # Arquivos que serão copiados para dentro da pasta do projeto
 FILES_TO_COPY = main.tex workconfig.sty
@@ -27,6 +30,12 @@ copy_files: create_project_dir
 	@cp $(FILES_TO_COPY) $(PROJECT_NAME)/
 	@echo "Arquivos copiados: $(FILES_TO_COPY)"
 
+# Comando para copiar pastas com seus conteúdos
+copy_folders: create_project_dir
+	@echo "Copiando pastas e seus conteúdos..."
+	@cp -r $(FOLDERS_TO_COPY) $(PROJECT_NAME)/
+	@echo "Pastas copiadas: $(FOLDERS_TO_COPY)"
+
 # Comando para criar arquivos vazios
 create_empty_files: create_project_dir
 	@echo "Criando arquivos vazios..."
@@ -39,7 +48,7 @@ show_structure:
 	@tree $(PROJECT_NAME)
 
 # Comando principal que cria tudo
-all: create_dirs copy_files create_empty_files show_structure
+all: create_dirs copy_files copy_folders create_empty_files show_structure
 	@echo "Projeto $(PROJECT_NAME) criado com sucesso!"
 
 # Limpar a pasta do projeto
@@ -52,6 +61,6 @@ clean:
 help:
 	@echo "Makefile para gerar a estrutura do projeto LaTeX."
 	@echo "Comandos disponíveis:"
-	@echo "  make all         - Cria diretórios e arquivos na pasta $(PROJECT_NAME)"
+	@echo "  make all         - Cria diretórios, copia arquivos e pastas na pasta $(PROJECT_NAME)"
 	@echo "  make clean       - Remove a pasta $(PROJECT_NAME)"
 	@echo "  make show_structure - Exibe a estrutura do projeto"

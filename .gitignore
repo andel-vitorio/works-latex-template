@@ -1,3 +1,4 @@
 output/*
 **/*.log
 !output/*.pdf
+meu_projeto_latex
