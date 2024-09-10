@@ -1,13 +1,13 @@
 # Projeto LaTeX - Template Estrutural
 
-Este repositório contém um **template LaTeX** organizado para a criação de documentos de forma padronizada. O projeto inclui um `Makefile` que automatiza a criação de diretórios e a cópia de arquivos essenciais para começar um novo trabalho. 
+Este repositório contém um **template LaTeX** organizado para a criação de documentos de forma padronizada. O projeto inclui um `Makefile` que automatiza a criação de diretórios e a cópia de arquivos essenciais para começar um novo trabalho.
 
 ## Estrutura do Projeto
 
 A estrutura do projeto é composta pelos seguintes diretórios e arquivos:
 
 ```
-meu_projeto_latex/
+<PROJECT_NAME>/
 │
 ├── Appendixes/      # Diretório para apêndices
 ├── Chapters/        # Diretório para capítulos
@@ -37,20 +37,23 @@ Antes de iniciar, certifique-se de ter o seguinte instalado:
    cd projeto-latex
    ```
 
-2. **Gerar a estrutura do projeto**:
-   Execute o seguinte comando para criar os diretórios e arquivos dentro de uma nova pasta chamada `meu_projeto_latex`:
+2. **Gerar a Estrutura do Projeto**:
+   Para criar a estrutura do projeto dentro de uma nova pasta chamada `<PROJECT_NAME>`, use o comando `make` com os seguintes parâmetros:
 
-   ```bashw
-   make all
+   ```bash
+   make -C <TEMPLATE_DIR> PROJECT_NAME="<PROJECT_NAME>" TARGET_DIR=<TARGET_DIR>
    ```
 
-   Esse comando cria os diretórios e copia os arquivos essenciais (`main.tex` e `workconfig.sty`) e as pastas (`Logos` e `Pre-textual`) com seus conteúdos.
+   - `PROJECT_NAME="<PROJECT_NAME>"` define o nome da pasta do projeto.
+   - `TARGET_DIR=<TARGET_DIR>` especifica o diretório onde o projeto será criado, relativo ao diretório onde o `make` é chamado. Por exemplo, `TARGET_DIR=..` cria o projeto no diretório pai do diretório atual.
 
-3. **Limpar a estrutura do projeto**:
+   O comando `make` executa o alvo padrão `all`, que verifica se o projeto já existe. Se não existir, cria os diretórios e copia os arquivos essenciais (`main.tex` e `workconfig.sty`) e as pastas (`Logos` e `Pre-textual`) com seus conteúdos. Se o projeto já existir, apenas exibe uma mensagem e não realiza mais ações.
+
+3. **Limpar a Estrutura do Projeto**:
    Caso você deseje remover toda a estrutura criada, use o comando:
 
    ```bash
-   make clean
+   make -C <TEMPLATE_DIR> PROJECT_NAME="<PROJECT_NAME>" clean
    ```
 
 ### Personalização
@@ -62,5 +65,3 @@ Você pode personalizar o arquivo `workconfig.sty` para alterar as configuraçõ
 Sinta-se à vontade para abrir _issues_ ou enviar _pull requests_ caso tenha sugestões de melhorias ou encontre problemas.
 
 ## Licença
-
-Este projeto está licenciado sob os termos da [Licença MIT](LICENSE).
